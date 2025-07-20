@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cadastro de Cliente</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       background: #111;
@@ -11,20 +11,29 @@
       font-family: Arial, sans-serif;
       padding: 20px;
     }
+    h1 {
+      color: #25d366;
+    }
     input, textarea, button {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
       border: none;
       border-radius: 5px;
+      font-size: 16px;
+    }
+    input, textarea {
+      background: #333;
+      color: white;
     }
     button {
-      background: #00cc66;
+      background: #25d366;
       color: white;
       font-weight: bold;
+      cursor: pointer;
     }
     a {
-      color: #00cc66;
+      color: #25d366;
       text-decoration: none;
       display: inline-block;
       margin-top: 20px;
@@ -32,15 +41,69 @@
   </style>
 </head>
 <body>
+
   <h1>Cadastro de Cliente</h1>
-  <form>
-    <input type="text" placeholder="Nome do Cliente" required>
-    <input type="tel" placeholder="Telefone" required>
-    <input type="text" placeholder="Endereço" required>
-    <textarea placeholder="Serviço feito" required></textarea>
+
+  <form onsubmit="salvarCadastro(event)">
+    <input type="text" id="nome" placeholder="Nome do Cliente" required />
+    <input type="tel" id="telefone" placeholder="Telefone" required />
+    <input type="text" id="endereco" placeholder="Endereço" required />
+    <textarea id="servico" placeholder="Serviço feito" required></textarea>
     <button type="submit">Salvar</button>
   </form>
 
-  <a href="index.html">⬅ Voltar para o início</a>
+  <a href="index.html">⬅ Voltar ao Início</a>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDp8BMu69Il0SCcp-j-SjyZs6-YkTUlMms",
+      authDomain: "genesis-azulejista.firebaseapp.com",
+      projectId: "genesis-azulejista",
+      storageBucket: "genesis-azulejista.appspot.com",
+      messagingSenderId: "517278488826",
+      appId: "1:517278488826:web:c27ed102e9f479e3a6ddc6"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Função para salvar cadastro
+    function salvarCadastro(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const endereco = document.getElementById('endereco').value.trim();
+      const servico = document.getElementById('servico').value.trim();
+
+      if (!nome || !telefone || !endereco || !servico) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      db.collection("cadastros").add({
+        nome,
+        telefone,
+        endereco,
+        servico,
+        criadoEm: new Date()
+      })
+      .then(() => {
+        alert("Cadastro salvo com sucesso!");
+        document.getElementById('nome').value = "";
+        document.getElementById('telefone').value = "";
+        document.getElementById('endereco').value = "";
+        document.getElementById('servico').value = "";
+      })
+      .catch((error) => {
+        alert("Erro ao salvar: " + error.message);
+      });
+    }
+  </script>
+
 </body>
 </html>
+
