@@ -34,8 +34,68 @@
     }
 
     .conteudo {
-      padding: 40px;
+      padding: 40px 20px;
       text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .conteudo h1 {
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    .texto-inicio {
+      margin-bottom: 40px;
+    }
+
+    .texto-inicio h2 {
+      text-align: center;
+      color: #000;
+      margin-bottom: 15px;
+    }
+
+    .texto-inicio p {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
+    .texto-inicio strong {
+      font-weight: 700;
+    }
+
+    .texto-inicio a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .texto-inicio a:hover {
+      text-decoration: underline;
+    }
+
+    .galeria {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .galeria img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      height: auto;
+    }
+
+    @media (max-width: 600px) {
+      .galeria img {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -47,8 +107,23 @@
   </div>
 
   <div class="conteudo">
+
     <h1>Bem-vinda!</h1>
     <p>Clique no menu ☰ para acessar as opções.</p>
+
+    <div class="texto-inicio">
+      <h2>Transformamos seu sonho em realidade</h2>
+      <p>Oferecemos serviços especializados em <strong>porcelanato</strong>, <strong>elétrica e iluminação</strong>, <strong>gesso</strong> e <strong>hidráulica</strong>. Tudo com acabamento impecável, atendimento humanizado e preço justo.</p>
+      <p>Conte com nossa equipe feminina para entregar sua reforma com <strong>agilidade</strong>, <strong>segurança</strong> e <strong>qualidade de alto padrão</strong> conforme a norma <a href="https://github.com/9481A24/Gilson-marco/blob/main/images%20(3).jpeg" target="_blank">ABNT NBR 16.280</a>.</p>
+    </div>
+
+    <div class="galeria">
+      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(4).jpeg" alt="Foto 1" />
+      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(3).jpeg" alt="Foto 2" />
+      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Foto 3" />
+      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Foto 4" />
+    </div>
+
   </div>
 
   <script>
