@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+
+    .topo {
+      background: #000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    .menu-opcoes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .menu-opcoes a {
+      text-decoration: none;
+      color: white;
+      background: #222;
+      padding: 15px 30px;
+      margin: 15px;
+      border-radius: 5px;
+      font-size: 18px;
+      width: 250px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .menu-opcoes a:hover {
+      background: #444;
+    }
+
+    .voltar {
+      margin-top: 30px;
+      color: #222;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topo">Menu</div>
+
+  <div class="menu-opcoes">
+    <a href="cadastro.html">Cadastro</a>
+    <a href="admin.html">Área Administrativa</a>
+    <div class="voltar" onclick="history.back()">← Voltar</div>
+  </div>
+
+</body>
+</html>
+
