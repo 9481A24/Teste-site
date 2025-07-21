@@ -3,132 +3,133 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elas Azulejista</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Tela Inteira com Cadastro</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-    }
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
+      background: #000;
+      color: white;
     }
 
     header {
-      background-color: #000;
-      color: #fff;
-      padding: 10px 20px;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #444;
     }
 
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .menu-icon {
-      font-size: 30px;
+    .menu-button {
+      font-size: 18px;
+      background: none;
+      border: none;
+      color: white;
       cursor: pointer;
     }
 
-    .menu {
-      display: none;
+    /* Menu de tela inteira */
+    .full-screen-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: #111;
+      color: white;
+      transition: right 0.5s ease-in-out;
+      z-index: 9999;
+      padding: 40px 20px;
+    }
+
+    .full-screen-menu.open {
+      right: 0;
+    }
+
+    .close-btn {
       position: absolute;
-      top: 60px;
+      top: 20px;
       right: 20px;
-      background: #fff;
-      border: 1px solid #ccc;
+      font-size: 22px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .full-screen-menu h2 {
+      margin-top: 60px;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .full-screen-menu input {
+      width: 100%;
       padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
     }
 
-    .menu a {
-      display: block;
-      margin-bottom: 10px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-    }
-
-    .text-inicio {
-      margin-top: 80px;
-      padding: 20px;
+    .full-screen-menu button.enviar {
+      width: 100%;
+      padding: 12px;
+      background-color: #00cc66;
+      color: white;
+      border: none;
+      border-radius: 4px;
       font-size: 18px;
-      line-height: 1.6;
+      margin-top: 20px;
+      cursor: pointer;
     }
 
-    .gallery {
-      padding: 10px;
-    }
-
-    .gallery img {
-      width: 98%;
-      display: block;
-      margin: 10px auto;
-      border-radius: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .menu {
-        right: 10px;
-      }
+    .full-screen-menu button.enviar:hover {
+      background-color: #00aa55;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">Elas Azulejista</div>
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    <div class="menu" id="menu">
-
-
-      
-      <a href="cadastro.html">  </a>
-      <a href="admin.html">  </a>
-
-
-
-      
-    </div>
+    <div><strong>abdz—do</strong></div>
+    <button class="menu-button" onclick="abrirMenu()">menu</button>
   </header>
 
-  <div class="text-inicio">
-    <h2>Transformamos seu sonho em realidade</h2>
-    <p>
-      Oferecemos serviços especializados em porcelanato, elétrica e iluminação, gesso e hidráulica.
-      Tudo com acabamento impecável, atendimento humanizado e preço justo.
-      Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão
-      <a href="https://github.com/9481A24/Gilson-marco/blob/main/images%20(3).jpeg" target="_blank">ABNT NBR 16.280</a>.
-    </p>
-  </div>
-
-  <div class="gallery">
-    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(4).jpeg" alt="Foto 1" />
-    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(3).jpeg" alt="Foto 2" />
-    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(2).jpeg" alt="Foto 3" />
-    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(2).jpeg" alt="Foto 4" />
+  <!-- Menu tela inteira -->
+  <div id="menuTelaInteira" class="full-screen-menu">
+    <button class="close-btn" onclick="fecharMenu()">✕</button>
+    <h2>Cadastro de Cliente</h2>
+    <input type="text" placeholder="Nome do cliente" id="nome" />
+    <input type="tel" placeholder="Telefone" id="telefone" />
+    <input type="text" placeholder="CPF" id="cpf" />
+    <button class="enviar" onclick="enviarCadastro()">Enviar</button>
   </div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    function abrirMenu() {
+      document.getElementById('menuTelaInteira').classList.add('open');
     }
 
-    // Fecha o menu ao clicar fora
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('menu');
-      const icon = document.querySelector('.menu-icon');
-      if (!menu.contains(event.target) && !icon.contains(event.target)) {
-        menu.style.display = 'none';
+    function fecharMenu() {
+      document.getElementById('menuTelaInteira').classList.remove('open');
+    }
+
+    function enviarCadastro() {
+      const nome = document.getElementById('nome').value;
+      const telefone = document.getElementById('telefone').value;
+      const cpf = document.getElementById('cpf').value;
+
+      if (nome && telefone && cpf) {
+        alert(`Cadastro enviado!\nNome: ${nome}\nTelefone: ${telefone}\nCPF: ${cpf}`);
+        fecharMenu(); // fecha menu depois do envio
+      } else {
+        alert("Preencha todos os campos antes de enviar.");
       }
-    });
+    }
   </script>
+
 </body>
 </html>
