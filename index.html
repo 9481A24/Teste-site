@@ -3,21 +3,28 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elas Azulejista</title>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
     }
 
-    .topo {
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background: #000;
-      color: white;
     }
 
     .logo {
@@ -25,112 +32,96 @@
       font-weight: bold;
     }
 
-    .menu-btn {
-      font-size: 28px;
-      background: none;
-      border: none;
-      color: white;
+    .menu-icon {
+      font-size: 30px;
       cursor: pointer;
     }
 
-    .conteudo {
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-      color: #333;
+    .menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .menu a {
+      display: block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .text-inicio {
+      margin-top: 80px;
+      padding: 20px;
+      font-size: 18px;
       line-height: 1.6;
     }
 
-    .conteudo h1 {
-      margin-bottom: 20px;
-      color: #000;
+    .gallery {
+      padding: 10px;
     }
 
-    .texto-inicio {
-      margin-bottom: 40px;
-    }
-
-    .texto-inicio h2 {
-      text-align: center;
-      color: #000;
-      margin-bottom: 15px;
-    }
-
-    .texto-inicio p {
-      margin: 10px 0;
-      font-size: 1.1em;
-    }
-
-    .texto-inicio strong {
-      font-weight: 700;
-    }
-
-    .texto-inicio a {
-      color: #007BFF;
-      text-decoration: none;
-    }
-
-    .texto-inicio a:hover {
-      text-decoration: underline;
-    }
-
-    .galeria {
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-
-    .galeria img {
-      width: 100%;
-      max-width: 900px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      height: auto;
+    .gallery img {
+      width: 98%;
+      display: block;
+      margin: 10px auto;
+      border-radius: 10px;
     }
 
     @media (max-width: 600px) {
-      .galeria img {
-        max-width: 100%;
+      .menu {
+        right: 10px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="topo">
+  <header>
     <div class="logo">Elas Azulejista</div>
-    <button class="menu-btn" onclick="abrirMenu()">☰</button>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="cadastro.html">Cadastro</a>
+      <a href="admin.html">Área Administrativa</a>
+    </div>
+  </header>
+
+  <div class="text-inicio">
+    <h2>Transformamos seu sonho em realidade</h2>
+    <p>
+      Oferecemos serviços especializados em porcelanato, elétrica e iluminação, gesso e hidráulica.
+      Tudo com acabamento impecável, atendimento humanizado e preço justo.
+      Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão
+      <a href="https://github.com/9481A24/Gilson-marco/blob/main/images%20(3).jpeg" target="_blank">ABNT NBR 16.280</a>.
+    </p>
   </div>
 
-  <div class="conteudo">
-
-    <h1>Bem-vinda!</h1>
-    <p>Clique no menu ☰ para acessar as opções.</p>
-
-    <div class="texto-inicio">
-      <h2>Transformamos seu sonho em realidade</h2>
-      <p>Oferecemos serviços especializados em <strong>porcelanato</strong>, <strong>elétrica e iluminação</strong>, <strong>gesso</strong> e <strong>hidráulica</strong>. Tudo com acabamento impecável, atendimento humanizado e preço justo.</p>
-      <p>Conte com nossa equipe feminina para entregar sua reforma com <strong>agilidade</strong>, <strong>segurança</strong> e <strong>qualidade de alto padrão</strong> conforme a norma <a href="https://github.com/9481A24/Gilson-marco/blob/main/images%20(3).jpeg" target="_blank">ABNT NBR 16.280</a>.</p>
-    </div>
-
-    <div class="galeria">
-      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(4).jpeg" alt="Foto 1" />
-      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(3).jpeg" alt="Foto 2" />
-      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Foto 3" />
-      <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Foto 4" />
-    </div>
-
+  <div class="gallery">
+    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(4).jpeg" alt="Foto 1" />
+    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(3).jpeg" alt="Foto 2" />
+    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(2).jpeg" alt="Foto 3" />
+    <img src="https://github.com/9481A24/Gilson-marco/raw/main/images%20(2).jpeg" alt="Foto 4" />
   </div>
 
   <script>
-    function abrirMenu() {
-      window.location.href = "menu.html";
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
-  </script>
 
+    // Fecha o menu ao clicar fora
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menu');
+      const icon = document.querySelector('.menu-icon');
+      if (!menu.contains(event.target) && !icon.contains(event.target)) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
