@@ -29,22 +29,24 @@
       cursor: pointer;
     }
 
-    /* Menu de tela inteira */
+    /* Menu de tela inteira com transição direita → esquerda */
     .full-screen-menu {
       position: fixed;
       top: 0;
-      right: -100%;
-      width: 100%;
-      height: 100%;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       background-color: #111;
       color: white;
-      transition: right 0.5s ease-in-out;
+      transform: translateX(100%);
+      transition: transform 0.5s ease-in-out;
       z-index: 9999;
       padding: 40px 20px;
+      box-sizing: border-box;
     }
 
     .full-screen-menu.open {
-      right: 0;
+      transform: translateX(0%);
     }
 
     .close-btn {
