@@ -1,2 +1,261 @@
 
-gʻhhĥjjjjjj
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Tela Inteira com Cadastro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: white;
+      padding-top: 70px; /* Para evitar sobrepor o header fixo */
+      padding-bottom: 40px; /* Para evitar que conteúdo fique atrás do rodapé */
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0; /* só em cima e embaixo */
+      border-bottom: 1px solid #444;
+      background-color: #000;
+      z-index: 1000;
+    }
+
+    header div {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      padding-left: 20px;  /* distância da borda esquerda */
+      margin-right: 30px;  /* distância do botão */
+    }
+
+    .menu-button {
+      font-size: 18px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding-right: 20px; /* distância da borda direita */
+      margin-left: 0;
+    }
+
+    .intro-text {
+      max-width: 800px;
+      margin: 20px auto 40px auto;
+      padding: 0 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .intro-text h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .intro-text p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .intro-text .highlight {
+      color: #00aaff; /* azul claro */
+      font-weight: bold;
+    }
+
+    /* Menu de tela inteira com transição direita → esquerda */
+    .full-screen-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #111;
+      color: white;
+      transform: translateX(100%);
+      transition: transform 0.5s ease-in-out;
+      z-index: 9999;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .full-screen-menu.open {
+      transform: translateX(0%);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 22px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .full-screen-menu h2 {
+      margin-top: 60px;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .full-screen-menu input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .full-screen-menu button.enviar {
+      width: 100%;
+      padding: 12px;
+      background-color: #00cc66;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .full-screen-menu button.enviar:hover {
+      background-color: #00aa55;
+    }
+
+    /* Estilo simples para espaçamento entre as imagens */
+    .imagens-container img {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+
+    /* Rodapé */
+    footer {
+      background-color: #111;
+      color: white;
+      padding: 10px 0 10px 20px; /* cima direita baixo esquerda */
+      text-align: left;
+      font-size: 14px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border-top: 1px solid #444;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    /* Botão WhatsApp flutuante */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 80px; /* acima do rodapé */
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      z-index: 10000;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #128c4a;
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>Elas azulejista</div>
+    <button class="menu-button" onclick="abrirMenu()">menu</button>
+  </header>
+
+  <section class="intro-text">
+    <h1>Transformamos seu sonho em realidade</h1>
+    <p>
+      Oferecemos serviços especializados em 
+      <span class="highlight">porcelanato</span>, 
+      <span class="highlight">elétrica</span> e 
+      <span class="highlight">iluminação</span>, 
+      <span class="highlight">gesso</span> e 
+      <span class="highlight">hidráulica</span>. Tudo com acabamento impecável, atendimento humanizado e preço justo. Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão ABNT NBR 16.280.
+    </p>
+  </section>
+
+  <!-- Menu tela inteira -->
+  <div id="menuTelaInteira" class="full-screen-menu">
+    <button class="close-btn" onclick="fecharMenu()">Close</button>
+    <h2>Cadastro de Cliente</h2>
+    <input type="text" placeholder="Nome do cliente" id="nome" />
+    <input type="tel" placeholder="Telefone" id="telefone" />
+    <input type="text" placeholder="CPF" id="cpf" />
+    <button class="enviar" onclick="enviarCadastro()">Salvar</button>
+  </div>
+
+  <!-- Imagens adicionadas -->
+  <div class="imagens-container">
+    <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Imagem 1" />
+    <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(4).jpeg" alt="Imagem 2" />
+    <img src="https://github.com/Andriele2025/Botoes/raw/main/hero_bitree.jpg.webp" alt="Imagem 3" />
+    <img src="https://github.com/Andriele2025/Botoes/raw/main/hero_barrel-riot.jpg.webp" alt="Imagem 4" />
+  </div>
+
+  <footer>
+    <p>CNPJ: 12.345.678/0001-90</p>
+  </footer>
+
+  <!-- Botão WhatsApp flutuante -->
+  <a href="https://wa.me/5532995439612" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+
+  <script>
+    function abrirMenu() {
+      document.getElementById('menuTelaInteira').classList.add('open');
+    }
+
+    function fecharMenu() {
+      document.getElementById('menuTelaInteira').classList.remove('open');
+    }
+
+    function enviarCadastro() {
+      const nome = document.getElementById('nome').value;
+      const telefone = document.getElementById('telefone').value;
+      const cpf = document.getElementById('cpf').value;
+
+      if (nome && telefone && cpf) {
+        alert(`Cadastro enviado!\nNome: ${nome}\nTelefone: ${telefone}\nCPF: ${cpf}`);
+        fecharMenu(); // fecha menu depois do envio
+      } else {
+        alert("Preencha todos os campos antes de enviar.");
+      }
+    }
+  </script>
+
+</body>
+</html>
