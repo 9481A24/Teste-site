@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu Tela Inteira sem Formulário</title>
+  <title>Menu Tela Inteira com Login</title>
   <style>
     body {
       margin: 0;
@@ -82,6 +83,8 @@
       z-index: 9999;
       padding: 40px 20px;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
     }
 
     .full-screen-menu.open {
@@ -89,14 +92,20 @@
     }
 
     .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+      align-self: flex-end;
       font-size: 22px;
       background: none;
       border: none;
       color: white;
       cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .iframe-container {
+      flex-grow: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
     }
 
     /* Estilo simples para espaçamento entre as imagens */
@@ -171,10 +180,10 @@
     </p>
   </section>
 
-  <!-- Menu tela inteira SEM formulário -->
+  <!-- Menu tela inteira COM iframe carregando login.html -->
   <div id="menuTelaInteira" class="full-screen-menu">
     <button class="close-btn" onclick="fecharMenu()">Close</button>
-    <!-- Formulário removido -->
+    <iframe src="login.html" class="iframe-container" frameborder="0"></iframe>
   </div>
 
   <div class="imagens-container">
