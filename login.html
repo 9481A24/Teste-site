@@ -13,8 +13,16 @@
     }
     button {
       padding: 10px 20px;
-      margin: 10px;
+      margin: 10px 5px 10px 0;
       cursor: pointer;
+      background-color: #00aaff;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0088cc;
     }
     .hidden {
       display: none;
@@ -27,6 +35,10 @@
       padding: 8px;
       width: 100%;
       max-width: 300px;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background: #222;
+      color: white;
     }
     #clientesList {
       margin-top: 20px;
@@ -41,13 +53,19 @@
       padding: 8px;
       text-align: left;
     }
-    /* Form financeiro simples */
     #formFinanceiro {
       margin-top: 30px;
       max-width: 600px;
       background: #222;
       padding: 20px;
       border-radius: 6px;
+    }
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+    p.error {
+      color: #ff5555;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -86,7 +104,7 @@
     </label>
     <button onclick="fazerLogin()">Entrar</button>
     <button onclick="fecharLogin()">Fechar</button>
-    <p id="msgLogin" style="color: red;"></p>
+    <p id="msgLogin" class="error"></p>
   </div>
 
   <!-- Área Admin -->
@@ -101,7 +119,7 @@
 
     <div id="formFinanceiro">
       <h3>Formulário Financeiro</h3>
-      <!-- Coloque seu formulário financeiro aqui, me envie para eu ajudar -->
+      <!-- Coloque seu formulário financeiro aqui -->
       <p>Aqui ficará o formulário financeiro.</p>
     </div>
 
@@ -117,6 +135,7 @@
       document.getElementById('formCadastro').classList.remove('hidden');
       document.getElementById('formLogin').classList.add('hidden');
       document.getElementById('areaAdmin').classList.add('hidden');
+      limparMensagemLogin();
     }
 
     function fecharCadastro() {
@@ -150,11 +169,15 @@
       document.getElementById('formLogin').classList.remove('hidden');
       document.getElementById('formCadastro').classList.add('hidden');
       document.getElementById('areaAdmin').classList.add('hidden');
-      document.getElementById('msgLogin').textContent = '';
+      limparMensagemLogin();
     }
 
     function fecharLogin() {
       document.getElementById('formLogin').classList.add('hidden');
+      limparMensagemLogin();
+    }
+
+    function limparMensagemLogin() {
       document.getElementById('msgLogin').textContent = '';
     }
 
@@ -176,6 +199,7 @@
       document.getElementById('formCadastro').classList.add('hidden');
       document.getElementById('areaAdmin').classList.remove('hidden');
       atualizarListaClientes();
+      limparMensagemLogin();
     }
 
     // Atualiza tabela clientes
@@ -193,6 +217,7 @@
     function fazerLogout() {
       document.getElementById('areaAdmin').classList.add('hidden');
       alert('Logout efetuado');
+      mostrarLogin();
     }
   </script>
 
