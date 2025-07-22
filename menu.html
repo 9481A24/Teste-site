@@ -1,228 +1,200 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sistema Cliente/Admin</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    margin: 0; padding: 0;
-  }
-  .container {
-    max-width: 500px;
-    margin: 40px auto;
-    background: rgba(255,255,255,0.95);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
-  }
-  h2 {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-  button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #218838;
-  }
-  .link-login {
-    text-align: center;
-    margin-top: 10px;
-    cursor: pointer;
-    color: #007bff;
-    text-decoration: underline;
-  }
-  .hidden {
-    display: none;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  th, td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  .logout-btn {
-    background-color: #dc3545;
-    margin-top: 10px;
-  }
-  .logout-btn:hover {
-    background-color: #b02a37;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sistema Cadastro e Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: white;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    input, label {
+      display: block;
+      margin: 8px 0;
+    }
+    input {
+      padding: 8px;
+      width: 100%;
+      max-width: 300px;
+    }
+    #clientesList {
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      max-width: 600px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid white;
+      padding: 8px;
+      text-align: left;
+    }
+    /* Form financeiro simples */
+    #formFinanceiro {
+      margin-top: 30px;
+      max-width: 600px;
+      background: #222;
+      padding: 20px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container" id="clienteBox">
-  <h2>Cadastro de Cliente</h2>
-  <form id="formCliente">
-    <input type="text" id="nome" placeholder="Nome Completo" required />
-    <input type="text" id="telefone" placeholder="Telefone" required />
-    <input type="text" id="endereco" placeholder="Endereço" />
-    <input type="date" id="dataCadastro" required />
-    <button type="submit">Cadastrar Cliente</button>
-  </form>
-  <div class="link-login" onclick="mostrarLogin()">Sou Administrador (Login)</div>
-</div>
+  <h1>Bem-vindo ao Sistema</h1>
 
-<div class="container hidden" id="loginBox">
-  <h2>Login Administrador</h2>
-  <input type="text" id="usuario" placeholder="Usuário" />
-  <input type="password" id="senha" placeholder="Senha" />
-  <button onclick="fazerLogin()">Entrar</button>
-  <div class="link-login" onclick="mostrarCadastro()">Voltar para Cadastro Cliente</div>
-</div>
+  <!-- Botões principais -->
+  <button onclick="mostrarCadastro()">Cadastro Cliente</button>
+  <button onclick="mostrarLogin()">Login Admin</button>
 
-<div class="container hidden" id="adminBox">
-  <h2>Painel do Administrador</h2>
-  <button class="logout-btn" onclick="logout()">Sair</button>
+  <!-- Formulário Cadastro -->
+  <div id="formCadastro" class="hidden">
+    <h2>Cadastro de Cliente</h2>
+    <label>Nome:
+      <input type="text" id="nome" />
+    </label>
+    <label>Telefone:
+      <input type="tel" id="telefone" />
+    </label>
+    <label>Endereço:
+      <input type="text" id="endereco" />
+    </label>
+    <button onclick="salvarCliente()">Salvar</button>
+    <button onclick="fecharCadastro()">Fechar</button>
+  </div>
 
-  <h3>Clientes Cadastrados</h3>
-  <table id="tabelaClientes">
-    <thead>
-      <tr><th>Nome</th><th>Telefone</th><th>Endereço</th><th>Data</th></tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <!-- Formulário Login -->
+  <div id="formLogin" class="hidden">
+    <h2>Login Admin</h2>
+    <label>Usuário:
+      <input type="text" id="loginUser" />
+    </label>
+    <label>Senha:
+      <input type="password" id="loginPass" />
+    </label>
+    <button onclick="fazerLogin()">Entrar</button>
+    <button onclick="fecharLogin()">Fechar</button>
+    <p id="msgLogin" style="color: red;"></p>
+  </div>
 
-  <h3>Lançar Cadastro Financeiro</h3>
-  <form id="formFinanceiro">
-    <input type="text" id="descricao" placeholder="Descrição" required />
-    <input type="number" id="valor" placeholder="Valor R$" required />
-    <select id="formaPagamento" required>
-      <option value="">Forma de Pagamento</option>
-      <option value="Dinheiro">Dinheiro</option>
-      <option value="Pix">Pix</option>
-      <option value="Cartão Crédito">Cartão Crédito</option>
-      <option value="Cartão Débito">Cartão Débito</option>
-    </select>
-    <input type="date" id="dataFinanceiro" required />
-    <button type="submit">Salvar Financeiro</button>
-  </form>
-</div>
+  <!-- Área Admin -->
+  <div id="areaAdmin" class="hidden">
+    <h2>Clientes Cadastrados</h2>
+    <table id="clientesList">
+      <thead>
+        <tr><th>Nome</th><th>Telefone</th><th>Endereço</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-<script>
-  // Mostrar telas
-  function mostrarLogin() {
-    document.getElementById('clienteBox').classList.add('hidden');
-    document.getElementById('loginBox').classList.remove('hidden');
-    document.getElementById('adminBox').classList.add('hidden');
-  }
-  function mostrarCadastro() {
-    document.getElementById('clienteBox').classList.remove('hidden');
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('adminBox').classList.add('hidden');
-  }
-  function mostrarAdmin() {
-    document.getElementById('clienteBox').classList.add('hidden');
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('adminBox').classList.remove('hidden');
-    carregarClientes();
-  }
+    <div id="formFinanceiro">
+      <h3>Formulário Financeiro</h3>
+      <!-- Coloque seu formulário financeiro aqui, me envie para eu ajudar -->
+      <p>Aqui ficará o formulário financeiro.</p>
+    </div>
 
-  // Salvar clientes no localStorage
-  function salvarClientesStorage(clientes) {
-    localStorage.setItem('clientes', JSON.stringify(clientes));
-  }
-  function carregarClientesStorage() {
-    const dados = localStorage.getItem('clientes');
-    return dados ? JSON.parse(dados) : [];
-  }
+    <button onclick="fazerLogout()">Logout</button>
+  </div>
 
-  // Cadastro cliente
-  document.getElementById('formCliente').addEventListener('submit', function(e){
-    e.preventDefault();
-    const nome = document.getElementById('nome').value.trim();
-    const telefone = document.getElementById('telefone').value.trim();
-    const endereco = document.getElementById('endereco').value.trim();
-    const data = document.getElementById('dataCadastro').value;
+  <script>
+    // Array para armazenar clientes
+    let clientes = [];
 
-    if (!nome || !telefone || !data) {
-      alert('Preencha os campos obrigatórios!');
-      return;
+    // Mostrar cadastro
+    function mostrarCadastro() {
+      document.getElementById('formCadastro').classList.remove('hidden');
+      document.getElementById('formLogin').classList.add('hidden');
+      document.getElementById('areaAdmin').classList.add('hidden');
     }
 
-    const clientes = carregarClientesStorage();
-    clientes.push({ nome, telefone, endereco, data });
-    salvarClientesStorage(clientes);
-
-    alert(`Cliente ${nome} cadastrado com sucesso!`);
-    this.reset();
-  });
-
-  // Login admin
-  function fazerLogin() {
-    const user = document.getElementById('usuario').value.trim();
-    const pass = document.getElementById('senha').value.trim();
-    if (user === 'admin' && pass === '1234') {
-      mostrarAdmin();
-    } else {
-      alert('Usuário ou senha incorretos.');
-    }
-  }
-
-  // Carregar tabela clientes no admin
-  function carregarClientes() {
-    const clientes = carregarClientesStorage();
-    const tbody = document.querySelector('#tabelaClientes tbody');
-    tbody.innerHTML = '';
-    if(clientes.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Nenhum cliente cadastrado</td></tr>';
-      return;
-    }
-    clientes.forEach(c => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${c.nome}</td><td>${c.telefone}</td><td>${c.endereco}</td><td>${c.data}</td>`;
-      tbody.appendChild(tr);
-    });
-  }
-
-  // Logout
-  function logout() {
-    mostrarLogin();
-    document.getElementById('usuario').value = '';
-    document.getElementById('senha').value = '';
-  }
-
-  // Formulário financeiro
-  document.getElementById('formFinanceiro').addEventListener('submit', function(e){
-    e.preventDefault();
-    const descricao = document.getElementById('descricao').value.trim();
-    const valor = document.getElementById('valor').value.trim();
-    const forma = document.getElementById('formaPagamento').value;
-    const data = document.getElementById('dataFinanceiro').value;
-
-    if (!descricao || !valor || !forma || !data) {
-      alert('Preencha todos os campos do financeiro!');
-      return;
+    function fecharCadastro() {
+      document.getElementById('formCadastro').classList.add('hidden');
     }
 
-    alert(`Lançamento financeiro salvo:\nDescrição: ${descricao}\nValor: R$${valor}\nForma: ${forma}\nData: ${data}`);
-    this.reset();
-  });
+    // Salvar cliente no array e limpar formulário
+    function salvarCliente() {
+      const nome = document.getElementById('nome').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const endereco = document.getElementById('endereco').value.trim();
 
-  // Começa mostrando cadastro cliente
-  mostrarCadastro();
-</script>
+      if (!nome || !telefone || !endereco) {
+        alert('Preencha todos os campos.');
+        return;
+      }
+
+      clientes.push({ nome, telefone, endereco });
+
+      alert('Cliente salvo!');
+
+      // Limpa campos
+      document.getElementById('nome').value = '';
+      document.getElementById('telefone').value = '';
+      document.getElementById('endereco').value = '';
+      fecharCadastro();
+    }
+
+    // Mostrar login admin
+    function mostrarLogin() {
+      document.getElementById('formLogin').classList.remove('hidden');
+      document.getElementById('formCadastro').classList.add('hidden');
+      document.getElementById('areaAdmin').classList.add('hidden');
+      document.getElementById('msgLogin').textContent = '';
+    }
+
+    function fecharLogin() {
+      document.getElementById('formLogin').classList.add('hidden');
+      document.getElementById('msgLogin').textContent = '';
+    }
+
+    // Fazer login
+    function fazerLogin() {
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value;
+
+      if (user === 'admin' && pass === '1234') {
+        mostrarAreaAdmin();
+      } else {
+        document.getElementById('msgLogin').textContent = 'Usuário ou senha incorretos!';
+      }
+    }
+
+    // Mostrar área admin com lista clientes e formulário financeiro
+    function mostrarAreaAdmin() {
+      document.getElementById('formLogin').classList.add('hidden');
+      document.getElementById('formCadastro').classList.add('hidden');
+      document.getElementById('areaAdmin').classList.remove('hidden');
+      atualizarListaClientes();
+    }
+
+    // Atualiza tabela clientes
+    function atualizarListaClientes() {
+      const tbody = document.querySelector('#clientesList tbody');
+      tbody.innerHTML = '';
+      clientes.forEach(cliente => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${cliente.nome}</td><td>${cliente.telefone}</td><td>${cliente.endereco}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Logout
+    function fazerLogout() {
+      document.getElementById('areaAdmin').classList.add('hidden');
+      alert('Logout efetuado');
+    }
+  </script>
 
 </body>
 </html>
