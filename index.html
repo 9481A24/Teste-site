@@ -1,11 +1,9 @@
-
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu Tela Inteira com Cadastro</title>
+  <title>Menu Tela Inteira sem Formulário</title>
   <style>
     body {
       margin: 0;
@@ -24,7 +22,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0; /* só em cima e embaixo */
+      padding: 16px 0;
       border-bottom: 1px solid #444;
       background-color: #000;
       z-index: 1000;
@@ -34,8 +32,8 @@
       font-size: 20px;
       font-weight: bold;
       color: white;
-      padding-left: 20px;  /* distância da borda esquerda */
-      margin-right: 30px;  /* distância do botão */
+      padding-left: 20px;
+      margin-right: 30px;
     }
 
     .menu-button {
@@ -44,7 +42,7 @@
       border: none;
       color: white;
       cursor: pointer;
-      padding-right: 20px; /* distância da borda direita */
+      padding-right: 20px;
       margin-left: 0;
     }
 
@@ -67,11 +65,10 @@
     }
 
     .intro-text .highlight {
-      color: #00aaff; /* azul claro */
+      color: #00aaff;
       font-weight: bold;
     }
 
-    /* Menu de tela inteira com transição direita → esquerda */
     .full-screen-menu {
       position: fixed;
       top: 0;
@@ -102,38 +99,6 @@
       cursor: pointer;
     }
 
-    .full-screen-menu h2 {
-      margin-top: 60px;
-      font-size: 24px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .full-screen-menu input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    .full-screen-menu button.enviar {
-      width: 100%;
-      padding: 12px;
-      background-color: #00cc66;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 18px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-
-    .full-screen-menu button.enviar:hover {
-      background-color: #00aa55;
-    }
-
     /* Estilo simples para espaçamento entre as imagens */
     .imagens-container img {
       width: 100%;
@@ -143,11 +108,10 @@
       border-radius: 8px;
     }
 
-    /* Rodapé */
     footer {
       background-color: #111;
       color: white;
-      padding: 10px 0 10px 20px; /* cima direita baixo esquerda */
+      padding: 10px 0 10px 20px;
       text-align: left;
       font-size: 14px;
       position: fixed;
@@ -159,12 +123,11 @@
       z-index: 1000;
     }
 
-    /* Botão WhatsApp flutuante */
     .whatsapp-float {
       position: fixed;
       width: 60px;
       height: 60px;
-      bottom: 80px; /* acima do rodapé */
+      bottom: 80px;
       right: 20px;
       background-color: #25d366;
       color: white;
@@ -208,17 +171,12 @@
     </p>
   </section>
 
-  <!-- Menu tela inteira -->
+  <!-- Menu tela inteira SEM formulário -->
   <div id="menuTelaInteira" class="full-screen-menu">
     <button class="close-btn" onclick="fecharMenu()">Close</button>
-    <h2>Cadastro de Cliente</h2>
-    <input type="text" placeholder="Nome do cliente" id="nome" />
-    <input type="tel" placeholder="Telefone" id="telefone" />
-    <input type="text" placeholder="CPF" id="cpf" />
-    <button class="enviar" onclick="enviarCadastro()">Salvar</button>
+    <!-- Formulário removido -->
   </div>
 
-  <!-- Imagens adicionadas -->
   <div class="imagens-container">
     <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Imagem 1" />
     <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(4).jpeg" alt="Imagem 2" />
@@ -230,7 +188,6 @@
     <p>CNPJ: 12.345.678/0001-90</p>
   </footer>
 
-  <!-- Botão WhatsApp flutuante -->
   <a href="https://wa.me/5532995439612" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </a>
@@ -243,20 +200,8 @@
     function fecharMenu() {
       document.getElementById('menuTelaInteira').classList.remove('open');
     }
-
-    function enviarCadastro() {
-      const nome = document.getElementById('nome').value;
-      const telefone = document.getElementById('telefone').value;
-      const cpf = document.getElementById('cpf').value;
-
-      if (nome && telefone && cpf) {
-        alert(`Cadastro enviado!\nNome: ${nome}\nTelefone: ${telefone}\nCPF: ${cpf}`);
-        fecharMenu(); // fecha menu depois do envio
-      } else {
-        alert("Preencha todos os campos antes de enviar.");
-      }
-    }
   </script>
 
 </body>
 </html>
+
