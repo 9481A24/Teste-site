@@ -128,7 +128,66 @@
 
     <div id="formFinanceiro">
       <h3>Formulário Financeiro</h3>
-      <p>Aqui ficará o formulário financeiro.</p>
+      <p>     <div>
+    <h3>Dados do Cliente</h3>
+    <label>Nome do Cliente:</label>
+    <input type="text" id="clienteNome" placeholder="Nome completo" />
+
+    <label>CPF do Cliente:</label>
+    <input type="text" id="clienteCPF" placeholder="CPF (somente números)" maxlength="11" 
+      onblur="buscarClientePorCPF(this.value.trim())" />
+
+    <label>RG do Cliente:</label>
+    <input type="text" id="clienteRG" placeholder="RG (somente números)" maxlength="15" />
+  </div>
+
+  <!-- Dados da Entrada -->
+  <div>
+    <h3>Dados da Entrada</h3>
+    <label>Data da Entrada:</label>
+    <input type="date" id="entradaData" />
+
+    <label>Valor (R$):</label>
+    <input type="number" id="entradaValor" step="0.01" min="0" oninput="calcularImposto()" />
+    <small id="impostoTexto" style="color: #888;"></small>
+
+    <label>Forma de Pagamento:</label>
+    <select id="formaPagamento">
+      <option value="">-- Selecione --</option>
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Pix">Pix</option>
+      <option value="Cartão Crédito">Cartão Crédito</option>
+      <option value="Cartão Débito">Cartão Débito</option>
+    </select>
+
+    <label>Parcelas (se cartão crédito, deixe 1 se não):</label>
+    <input type="number" id="parcelas" min="1" max="36" value="1" />
+  </div>
+
+</div>
+
+<!-- Dados do Prestador de Serviço -->
+<h3>Dados do Prestador de Serviço</h3>
+<label>Nome do Prestador:</label>
+<input type="text" id="prestadorNome" placeholder="Nome completo" />
+
+<label>CPF ou CNPJ do Prestador:</label>
+<input type="text" id="prestadorCPF" placeholder="CPF ou CNPJ (somente números)" maxlength="14" />
+
+<label>Endereço do Prestador:</label>
+<input type="text" id="prestadorEndereco" placeholder="Endereço completo" />
+
+<button onclick="registrarEntrada()">Confirmar Entrada</button>
+
+<!-- Comprovante -->
+<div id="comprovante">
+  <h3>Comprovante de Entrada</h3>
+  <div id="dadosComprovante"></div>
+  <div id="comprovante-buttons">
+    <button onclick="imprimirComprovante()">🖨️ Imprimir</button>
+    <button onclick="fecharComprovante()">OK</button>
+  </div>
+</div>  </p>
     </div>
 
     <button onclick="fazerLogout()">Logout</button>
