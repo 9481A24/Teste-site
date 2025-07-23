@@ -23,9 +23,17 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
-      border-bottom: 1px solid #444;
-      background-color: #000;
+      border-bottom: 1px solid transparent;
+      background-color: transparent;
+      color: white;
+      transition: background-color 0.3s ease, border-bottom-color 0.3s ease, box-shadow 0.3s ease;
       z-index: 1000;
+    }
+
+    header.scrolled {
+      background-color: #000;
+      border-bottom-color: #00aaff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
 
     header div {
@@ -107,13 +115,19 @@
       height: 100%;
     }
 
-    /* Estilo simples para espaçamento entre as imagens */
     .imagens-container img {
       width: 100%;
       max-width: 600px;
       display: block;
-      margin: 20px auto;
+      margin: 40px auto; /* espaçamento vertical */
       border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .imagens-container img:hover {
+      transform: scale(1.03);
+      cursor: pointer;
     }
 
     footer {
@@ -161,7 +175,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <div>Elas azulejista</div>
     <button class="menu-button" onclick="abrirMenu()">menu</button>
@@ -170,11 +183,11 @@
   <section class="intro-text">
     <h1>Transformamos seu sonho em realidade</h1>
     <p>
-      Oferecemos serviços especializados em 
-      <span class="highlight">porcelanato</span>, 
-      <span class="highlight">elétrica</span> e 
-      <span class="highlight">iluminação</span>, 
-      <span class="highlight">gesso</span> e 
+      Oferecemos serviços especializados em
+      <span class="highlight">porcelanato</span>,
+      <span class="highlight">elétrica</span> e
+      <span class="highlight">iluminação</span>,
+      <span class="highlight">gesso</span> e
       <span class="highlight">hidráulica</span>. Tudo com acabamento impecável, atendimento humanizado e preço justo. Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão ABNT NBR 16.280.
     </p>
   </section>
@@ -186,10 +199,17 @@
   </div>
 
   <div class="imagens-container">
-    <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(2).jpeg" alt="Imagem 1" />
-    <img src="https://raw.githubusercontent.com/9481A24/Gilson-marco/main/images%20(4).jpeg" alt="Imagem 2" />
-    <img src="https://github.com/Andriele2025/Botoes/raw/main/hero_bitree.jpg.webp" alt="Imagem 3" />
-    <img src="https://github.com/Andriele2025/Botoes/raw/main/hero_barrel-riot.jpg.webp" alt="Imagem 4" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/documentosreformaapartamento.webp?raw=true" alt="documentos reforma apartamento" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_biel.jpg.webp?raw=true" alt="hero biel" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_bitree.jpg.webp?raw=true" alt="hero bitree" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_boiling-point.jpg.webp?raw=true" alt="hero boiling point" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_botaniste.jpg.webp?raw=true" alt="hero botaniste" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_cellmong.jpg.webp?raw=true" alt="hero cellmong" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_imici.jpg.webp?raw=true" alt="hero imici" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_inverse-app.jpg.webp?raw=true" alt="hero inverse app" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_jupi.jpg.webp?raw=true" alt="hero jupi" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_mocktail.jpg.webp?raw=true" alt="hero mocktail" />
+    <img src="https://github.com/9481A24/Teste-site/blob/main/hero_moma-school-teachers.jpg.webp?raw=true" alt="hero moma school teachers" />
   </div>
 
   <footer>
@@ -208,7 +228,15 @@
     function fecharMenu() {
       document.getElementById('menuTelaInteira').classList.remove('open');
     }
-  </script>
 
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if(window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>
